@@ -1,6 +1,4 @@
 ---
-version: '3.8'
-
 volumes:
   prometheus-data:
     driver: local
@@ -8,6 +6,25 @@ volumes:
     driver: local
 
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    restart: unless-stopped
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+      - grafana
+      - node-exporter
+      - cadvisor
+      - uptime-kuma
+      - alertmanager
+      - svelte-leaflet
+
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -88,12 +105,22 @@ services:
     ports:
       - 9006:9093
     volumes:
-      - ./alertmanager/:/etc/alertmanager/
+      - ./ansible/roles/docker_deploy/files/alertmanager/:/etc/alertmanager/
     networks:
       - monitoring
     restart: always
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'    
+
+  svelte-leaflet:
+    image: valiantlynx/svelte-leaflet:latest
+    container_name: svelte-leaflet
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9007:3000
+
 networks:
   monitoring: {}
