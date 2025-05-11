@@ -23,7 +23,7 @@ services:
     depends_on:
       - cadvisor
     ports:
-      - 9091:9090
+      - 9001:9090
     networks:
       - monitoring
 
@@ -31,7 +31,7 @@ services:
     image: grafana/grafana:latest
     container_name: grafana
     ports:
-      - 3002:3000
+      - 9002:3000
     volumes:
       - grafana-data:/var/lib/grafana
       - ./ansible/roles/docker_deploy/files/grafana/:/etc/grafana/
@@ -43,7 +43,7 @@ services:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node_exporter
     ports:
-      - 9100:9100
+      - 9003:9100
     command: 
       - '--path.rootfs=/host'
     pid: host
@@ -57,7 +57,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     ports:
-      - 8081:8080
+      - 9004:8080
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -75,7 +75,7 @@ services:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
     ports:
-      - 3001:3001
+      - 9005:3001
     volumes:
       - ./ansible/roles/docker_deploy/files/uptime-kuma:/app/data
     restart: always
@@ -86,7 +86,7 @@ services:
     image: prom/alertmanager
     container_name: alertmanager
     ports:
-      - 9093:9093
+      - 9006:9093
     volumes:
       - ./alertmanager/:/etc/alertmanager/
     networks:
