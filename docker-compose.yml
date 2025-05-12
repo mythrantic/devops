@@ -4,6 +4,8 @@ volumes:
     driver: local
   grafana-data:
     driver: local
+  ollama-data:
+    driver: local
 
 services:
   nginx:
@@ -121,6 +123,149 @@ services:
       - monitoring
     ports:
       - 9007:3000
+  chattergun:
+    container_name: chattergun
+    image: valiantlynx/chattergun:latest
+    restart: unless-stopped
+    networks:
+      - monitoring
+    depends_on:
+      - chattergun-relay
+    ports:
+      - 9008:3000
 
+  chattergun-relay:
+    container_name: chattergun-relay
+    image: valiantlynx/chattergun-relay:latest
+    restart: unless-stopped
+    networks:
+      - monitoring
+    ports:
+      - 9009:8765
+
+  recommendation-engine:
+    image: valiantlynx/recommendation-engine:latest
+    container_name: recommendation-engine
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9010:8000
+
+  ollama-docker:
+    image: valiantlynx/ollama-docker:latest
+    container_name: ollama-docker
+    build: .
+    ports:
+      - 9011:8000
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: always
+    depends_on:
+      - ollama
+      - ollama-webui
+    networks:
+      - ollama-docker
+      
+  ollama:
+    container_name: ollama
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    image: docker.io/ollama/ollama:latest
+    ports:
+      - 9012:11434
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+    networks:
+      - ollama-docker
+    volumes:
+      - ollama-data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all 
+              capabilities: [gpu]
+
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: ollama-webui
+    depends_on:
+      - ollama
+    ports:
+      - 9013:8080
+    environment: # https://docs.openwebui.com/getting-started/env-configuration#default_models
+      - OLLAMA_BASE_URLS=http://192.168.38.157:9012 #comma separated ollama hosts
+      - ENV=dev
+      - WEBUI_AUTH=False
+      - WEBUI_NAME=valiantlynx AI
+      - WEBUI_URL=http://localhost:8080
+      - WEBUI_SECRET_KEY=t0p-s3cr3t
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+    networks:
+      - ollama-docker
+
+  svelte-rich-text:
+    image: valiantlynx/svelte-rich-text:latest
+    container_name: svelte-rich-text
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9014:3000
+
+  valiantos:
+    image: valiantlynx/valiantos:latest
+    container_name: valiantos
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9015:3000
+
+  raga:
+    image: valiantlynx/raga:latest
+    container_name: raga
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9016:3000
+    depends_on:
+      - raga-backend
+  raga-backend:
+    image: valiantlynx/raga-backend:latest
+    container_name: raga-backend
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9017:3000
+
+  gun-chat:
+    container_name: gun-chat
+    image: valiantlynx/gun-chat:latest
+    restart: unless-stopped
+    networks:
+      - monitoring
+    depends_on:
+      - gun-relay
+    ports:
+      - 9018:3000
+
+  gun-relay:
+    container_name: gun-relay
+    image: valiantlynx/gun-relay:latest
+    restart: unless-stopped
+    networks:
+      - monitoring
+    ports:
+      - 9019:8765
+    
 networks:
   monitoring: {}
+  ollama-docker:
+    external: false
