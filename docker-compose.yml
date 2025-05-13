@@ -6,6 +6,8 @@ volumes:
     driver: local
   ollama-data:
     driver: local
+  pocketbase-data:
+    driver: local
 
 services:
   nginx:
@@ -150,7 +152,7 @@ services:
     networks:
       - monitoring
     ports:
-      - 9010:8000
+      - 9010:3000
 
   ollama-docker:
     image: valiantlynx/ollama-docker:latest
@@ -275,8 +277,45 @@ services:
     ports:
       - 9020:3000
 
-    
+  svelte-manga-api:
+    image: valiantlynx/svelte-manga-api:latest
+    container_name: svelte-manga-api
+    restart: unless-stopped
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+    mem_limit: 500m
+    memswap_limit: 500m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://svelte-manga-api.valiantlynx.com"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - 9021:8000
+    networks:
+      - monitoring
+
+  svelte-manga:
+    image: valiantlynx/svelte-manga:latest
+    container_name: svelte-manga
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9022:3000
+
+  pocketbase-docker:
+    image: valiantlynx/pocketbase-docker:latest
+    container_name: pocketbase-docker 
+    ports:
+      - '9023:8080'
+    restart: always
+    volumes:
+      - pocketbase-data:/pb_data
+    networks:
+      - pocketbase
+
 networks:
   monitoring: {}
+  pocketbase:
   ollama-docker:
     external: false
