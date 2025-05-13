@@ -313,6 +313,58 @@ services:
     networks:
       - pocketbase
 
+  breath-first-search:
+    image: valiantlynx/breath-first-search:latest
+    container_name: breath-first-search
+    restart: unless-stopped
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+    mem_limit: 500m
+    memswap_limit: 500m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://breath-first-search.valiantlynx.com"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - 9024:8000
+    networks:
+      - monitoring
+
+  depth-first-search:
+    image: valiantlynx/depth-first-search:latest
+    container_name: depth-first-search
+    restart: unless-stopped
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+    mem_limit: 500m
+    memswap_limit: 500m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://depth-first-search.valiantlynx.com"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - 9025:8000
+    networks:
+      - monitoring
+
+  python-development-environment:
+    image: valiantlynx/python-development-environment:latest
+    container_name: python-development-environment
+    restart: unless-stopped
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+    mem_limit: 500m
+    memswap_limit: 500m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://python-development-environment.valiantlynx.com"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - 9026:8000
+    networks:
+      - monitoring
+
+
 networks:
   monitoring: {}
   pocketbase:
