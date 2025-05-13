@@ -264,6 +264,17 @@ services:
       - monitoring
     ports:
       - 9019:8765
+
+
+  svelte-altlokalt:
+    image: valiantlynx/svelte-altlokalt:latest
+    container_name: svelte-altlokalt
+    restart: always
+    networks:
+      - monitoring
+    ports:
+      - 9020:3000
+
     
 networks:
   monitoring: {}
