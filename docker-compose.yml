@@ -364,6 +364,23 @@ services:
     networks:
       - monitoring
 
+  streamio-server:
+    container_name: stremio-server
+    image: stremio/server:latest
+    ports:
+      - 9027:11470
+      # - 12470:12470
+    networks:
+      - monitoring
+
+  streamio:
+    container_name: stremio
+    image: valiantlynx/streamio-web:latest
+    ports:
+      - 9028:8080
+    networks:
+      - monitoring
+
 
 networks:
   monitoring: {}
