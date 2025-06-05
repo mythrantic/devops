@@ -1,0 +1,9 @@
+# external alertmanager yaml
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: 'null'
+
+receivers:
+- name: 'null'
