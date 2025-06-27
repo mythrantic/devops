@@ -149,7 +149,17 @@ services:
     restart: always
     command:
       - '--config.file=/etc/alertmanager/config.yml'
-      - '--storage.path=/alertmanager'    
+      - '--storage.path=/alertmanager'   
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    restart: always
+    ports:
+      - 9030:9000
+      - 9031:9443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data 
 
   svelte-leaflet:
     image: valiantlynx/svelte-leaflet:latest
@@ -421,3 +431,4 @@ networks:
   pocketbase:
   ollama-docker:
     external: false
+  portainer_data:
