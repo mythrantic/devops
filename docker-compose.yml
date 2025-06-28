@@ -12,6 +12,8 @@ volumes:
     driver: local
   promtail-data:
     driver: local
+  portainer_data:
+    driver: local
 
 
 
@@ -424,6 +426,17 @@ services:
       - 9028:8080
     networks:
       - monitoring
+  
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: "https://vault.valiantlynx.com"
+    volumes:
+      - ./vw-data/:/data/
+    ports:
+      - 9032:80
 
 
 networks:
@@ -431,4 +444,3 @@ networks:
   pocketbase:
   ollama-docker:
     external: false
-  portainer_data:
