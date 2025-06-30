@@ -1,0 +1,153 @@
+[2025-06-30 13:34:08] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at process.processTimers (node:internal/timers:509:9)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
+[2025-06-30 13:52:51] KnexTimeoutError: Knex: Timeout acquiring a connection. The pool is probably full. Are you missing a .transacting(trx) call?
+    at Client_SQLite3.acquireConnection (/app/node_modules/knex/lib/client.js:312:26)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:538:9)
+    at process.processTimers (node:internal/timers:512:7)
+    at async Runner.ensureConnection (/app/node_modules/knex/lib/execution/runner.js:287:28)
+    at async Runner.run (/app/node_modules/knex/lib/execution/runner.js:30:19)
+    at async RedBeanNode.storeCore (/app/node_modules/redbean-node/dist/redbean-node.js:150:26)
+    at async RedBeanNode.store (/app/node_modules/redbean-node/dist/redbean-node.js:110:20)
+    at async beat (/app/server/model/monitor.js:1013:13)
+    at async Timeout.safeBeat [as _onTimeout] (/app/server/model/monitor.js:1032:17) {
+  sql: undefined,
+  bindings: undefined
+}
