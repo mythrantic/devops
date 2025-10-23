@@ -37,7 +37,7 @@ services:
       - traefik.http.routers.prometheus.rule=Host(`prometheus.valiantlynx.com`)
       - traefik.http.routers.prometheus.entrypoints=web
       - traefik.http.services.prometheus.loadbalancer.server.port=9090
-      
+
   loki:
     image: grafana/loki:latest
     container_name: loki 
@@ -147,3 +147,6 @@ services:
       - portainer_data:/data 
     networks:
       - dokploy-network
+
+networks:
+  dokploy-network:
