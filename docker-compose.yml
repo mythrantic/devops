@@ -51,6 +51,14 @@ services:
       - loki-data:/loki
       - ./ansible/roles/docker_deploy/files/loki/:/etc/loki/
     restart: unless-stopped
+    expose:
+      - 3100
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.loki.rule=Host(`loki.valiantlynx.com`)
+      - traefik.http.routers.loki.entrypoints=web
+      - traefik.http.services.loki.loadbalancer.server.port=3100
+
 
   promtail:
     image: grafana/promtail:latest
@@ -78,6 +86,13 @@ services:
     restart: unless-stopped
     networks:
       - dokploy-network
+    espose:
+      - 3000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.rule=Host(`grafana.valiantlynx.com`)
+      - traefik.http.routers.grafana.entrypoints=web
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
 
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
@@ -121,6 +136,13 @@ services:
     restart: always
     networks:
       - dokploy-network
+    expose:
+      - 3001
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.uptime-kuma.rule=Host(`uptime.valiantlynx.com`)
+      - traefik.http.routers.uptime-kuma.entrypoints=web
+      - traefik.http.services.uptime-kuma.loadbalancer.server.port=3001
 
   alertmanager:
     image: prom/alertmanager
@@ -135,6 +157,13 @@ services:
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'   
+    expose:
+      - 9093
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.alertmanager.rule=Host(`alertmanager.valiantlynx.com`)
+      - traefik.http.routers.alertmanager.entrypoints=web
+      - traefik.http.services.alertmanager.loadbalancer.server.port=9093
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -147,6 +176,13 @@ services:
       - portainer_data:/data 
     networks:
       - dokploy-network
+    expose:
+      - 9000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer.rule=Host(`portainer.valiantlynx.com`)
+      - traefik.http.routers.portainer.entrypoints=web
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
 
 networks:
   dokploy-network:
