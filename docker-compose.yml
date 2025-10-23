@@ -31,7 +31,7 @@ services:
     ports:
       - 9001:9090
     networks:
-      - monitoring
+      - dokploy-network
   loki:
     image: grafana/loki:latest
     container_name: loki 
@@ -39,7 +39,7 @@ services:
       - "9029:3100"
     command: -config.file=/etc/loki/local-config.yaml
     networks:
-      - monitoring
+      - dokploy-network
     volumes:
       - /etc/prometheus:/config
       - loki-data:/loki
@@ -56,7 +56,7 @@ services:
       - ./ansible/roles/docker_deploy/files/promtail/:/etc/promtail/
     command: -config.file=/etc/promtail/config.yml
     networks:
-      - monitoring
+      - dokploy-network
     ports:
       - "1514:1514"
     restart: unless-stopped
@@ -71,7 +71,7 @@ services:
       - ./ansible/roles/docker_deploy/files/grafana/:/etc/grafana/
     restart: unless-stopped
     networks:
-      - monitoring
+      - dokploy-network
 
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
@@ -83,7 +83,7 @@ services:
     pid: host
     restart: unless-stopped
     networks:
-      - monitoring
+      - dokploy-network
     volumes:
       - '/:/host:ro,rslave'
 
@@ -103,7 +103,7 @@ services:
     devices:
       - /dev/kmsg
     networks:
-      - monitoring
+      - dokploy-network
 
   uptime-kuma:
     image: louislam/uptime-kuma:1
@@ -114,7 +114,7 @@ services:
       - ./ansible/roles/docker_deploy/files/uptime-kuma:/app/data
     restart: always
     networks:
-      - monitoring
+      - dokploy-network
 
   alertmanager:
     image: prom/alertmanager
@@ -124,7 +124,7 @@ services:
     volumes:
       - ./ansible/roles/docker_deploy/files/alertmanager/:/etc/alertmanager/
     networks:
-      - monitoring
+      - dokploy-network
     restart: always
     command:
       - '--config.file=/etc/alertmanager/config.yml'
@@ -139,6 +139,5 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data 
-
-networks:
-  monitoring: {}
+    networks:
+      - dokploy-network
