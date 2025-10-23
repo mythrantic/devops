@@ -28,8 +28,8 @@ services:
       - alertmanager:alertmanager
     depends_on:
       - cadvisor
-    ports:
-      - 9001:9090
+    expose:
+      - 9090
     networks:
       - dokploy-network
     labels:
