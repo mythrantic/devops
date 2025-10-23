@@ -86,7 +86,7 @@ services:
     restart: unless-stopped
     networks:
       - dokploy-network
-    espose:
+    expose:
       - 3000
     labels:
       - traefik.enable=true
