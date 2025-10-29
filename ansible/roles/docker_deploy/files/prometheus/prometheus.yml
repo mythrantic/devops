@@ -21,7 +21,7 @@ alerting:
   - scheme: http
     static_configs:
     - targets:
-      - "alertmanager:9093"
+      - "alertmanager.valiantlynx.com"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
@@ -38,9 +38,32 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 
-      
-
   - job_name: 'recommendation-engine'
     scrape_interval: 5s
     static_configs:
       - targets: ['recommendation-engine.valiantlynx.com']
+
+  - job_name: 'sortify-backend'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['sortify-backend.valiantlynx.com']
+
+  - job_name: 'altlokalt-backend'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['altlokalt-backend.valiantlynx.com']
+
+  - job_name: 'svelte-manga-api'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['svelte-manga-api.valiantlynx.com']
+
+
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'dcgm'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['dcgm.valiantlynx.com']
