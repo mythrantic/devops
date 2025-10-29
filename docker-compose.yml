@@ -186,7 +186,8 @@ services:
 
 
   dcgm_exporter:
-    image: nvcr.io/nvidia/k8s/dcgm-exporter:${DCGM_EXPORTER_IMAGE_TAG}
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:latest
+    container_name: dcgm_exporter
     deploy:
       resources:
         reservations:
@@ -199,8 +200,6 @@ services:
       - DCGM_EXPORTER_NO_HOSTNAME=1
     cap_add:
       - SYS_ADMIN
-    ports:
-      - "${DCGM_EXPORTER_HOST_PORT}:9400"
     networks:
       - dokploy-network
     expose:
@@ -210,7 +209,7 @@ services:
       - traefik.http.routers.dcgm_exporter.rule=Host(`dcgm.valiantlynx.com`)
       - traefik.http.routers.dcgm_exporter.entrypoints=web
       - traefik.http.services.dcgm_exporter.loadbalancer.server.port=9400
-      
+
 
 networks:
   dokploy-network:
