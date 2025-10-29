@@ -18,7 +18,7 @@ datasources:
     # <int> org id. will default to orgId 1 if not specified
     orgId: 1
     # <string> url
-    url: http://prometheus:9090
+    url: https://prometheus.valiantlynx.com
     # <string> database password, if used
     password:
     # <string> database user, if used
@@ -57,7 +57,7 @@ datasources:
     # <int> org id. will default to orgId 1 if not specified
     orgId: 1
     # <string> url
-    url: http://loki:3100
+    url: https://loki.valiantlynx.com
     # <string> database password, if used
     password:
     # <string> database user, if used
