@@ -233,7 +233,7 @@ services:
     image: grafana/tempo:latest
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
-      - ./ansible/roles/docker_deploy/files/grafana/tempo/tempo.yaml:/etc/tempo.yaml
+      - ./ansible/roles/docker_deploy/files/tempo/tempo.yaml:/etc/tempo.yaml
       - ./tempo-data:/var/tempo
     ports:
       - "14268:14268" # jaeger ingest
