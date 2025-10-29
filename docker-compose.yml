@@ -184,5 +184,33 @@ services:
       - traefik.http.routers.portainer.entrypoints=web
       - traefik.http.services.portainer.loadbalancer.server.port=9000
 
+
+  dcgm_exporter:
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:${DCGM_EXPORTER_IMAGE_TAG}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    restart: always
+    environment:
+      - DCGM_EXPORTER_NO_HOSTNAME=1
+    cap_add:
+      - SYS_ADMIN
+    ports:
+      - "${DCGM_EXPORTER_HOST_PORT}:9400"
+    networks:
+      - dokploy-network
+    expose:
+      - 9400
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dcgm_exporter.rule=Host(`dcgm.valiantlynx.com`)
+      - traefik.http.routers.dcgm_exporter.entrypoints=web
+      - traefik.http.services.dcgm_exporter.loadbalancer.server.port=9400
+      
+
 networks:
   dokploy-network:
