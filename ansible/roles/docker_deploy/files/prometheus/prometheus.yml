@@ -67,3 +67,11 @@ scrape_configs:
 
     static_configs:
       - targets: ['dcgm.valiantlynx.com']
+
+  - job_name: 'tempo'
+    static_configs:
+      - targets: ['tempo.valiantlynx.com'] #3200
+  - job_name: 'tempo-usage-metrics'
+    metrics_path: '/usage_metrics'
+    static_configs:
+      - targets: ['tempo.valiantlynx.com'] #3200
