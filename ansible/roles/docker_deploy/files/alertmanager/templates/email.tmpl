@@ -1,0 +1,85 @@
+{{ define "email.default.subject" }}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .GroupLabels.SortedPairs.Values | join " " }} {{ if gt (len .CommonLabels) (len .GroupLabels) }}({{ with .CommonLabels.Remove .GroupLabels.Names }}{{ .Values | join " " }}{{ end }}){{ end }}{{ end }}
+
+{{ define "email.default.html" }}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+.wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-firing {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert-resolved {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+    <h2>{{ .Status | toUpper }} Alert Summary</h2>
+    {{ if gt (len .Alerts.Firing) 0 }}
+    <div class="alert alert-firing">
+        <h3>🔥 {{ .Alerts.Firing | len }} Active Alerts</h3>
+        {{ range .Alerts.Firing }}
+        <div class="details">
+            <strong>Alert: {{ .Labels.alertname }}</strong><br/>
+            <strong>Severity: {{ .Labels.severity }}</strong><br/>
+            <strong>Instance: {{ .Labels.instance }}</strong><br/>
+            <strong>Job: {{ .Labels.job }}</strong><br/>
+            <strong>Started: {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}</strong><br/>
+            <p><strong>Description:</strong> {{ .Annotations.description }}</p>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+    {{ if gt (len .Alerts.Resolved) 0 }}
+    <div class="alert alert-resolved">
+        <h3>✅ {{ .Alerts.Resolved | len }} Resolved Alerts</h3>
+        {{ range .Alerts.Resolved }}
+        <div class="details">
+            <strong>Alert: {{ .Labels.alertname }}</strong><br/>
+            <strong>Severity: {{ .Labels.severity }}</strong><br/>
+            <strong>Instance: {{ .Labels.instance }}</strong><br/>
+            <strong>Job: {{ .Labels.job }}</strong><br/>
+            <strong>Resolved: {{ .EndsAt.Format "2006-01-02 15:04:05 MST" }}</strong><br/>
+            <p><strong>Description:</strong> {{ .Annotations.description }}</p>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+    <p style="font-size: 12px; color: #666;">
+        This is an automated alert from Alertmanager.
+        Please do not reply to this email.
+    </p>
+</div>
+</body>
+</html>
+{{ end }}

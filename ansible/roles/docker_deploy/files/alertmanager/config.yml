@@ -1,9 +1,45 @@
-# external alertmanager yaml
+# AlertManager Configuration
 global:
-  resolve_timeout: 1m
+  resolve_timeout: 5m
+  smtp_from: 'alertmanager@valiantlynx.com'
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_auth_username: 'your-email@gmail.com'  # Replace with your email
+  smtp_auth_password: 'your-app-password'     # Replace with your app password
+  smtp_require_tls: true
 
+# The root route on which all other routes build
 route:
-  receiver: 'null'
+  group_by: ['alertname', 'job']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: 'email-notifications'
+  routes:
+    - match:
+        severity: page
+      receiver: 'email-notifications'
+      continue: true
+    - match:
+        severity: critical
+      receiver: 'email-notifications'
+      continue: true
+
+# Inhibition rules allow to mute a set of alerts given that another alert is firing
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'instance']
 
 receivers:
-- name: 'null'
+- name: 'email-notifications'
+  email_configs:
+  - to: 'your-email@gmail.com'  # Replace with your email
+    send_resolved: true
+    headers:
+      subject: '{{ template "email.default.subject" . }}'
+    html: '{{ template "email.default.html" . }}'
+
+templates:
+- '/etc/alertmanager/templates/*.tmpl'
