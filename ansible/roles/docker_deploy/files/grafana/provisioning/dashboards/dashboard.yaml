@@ -39,4 +39,4 @@ providers:
     editable: true
     type: file
     options:
-      path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards
+      path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/common
