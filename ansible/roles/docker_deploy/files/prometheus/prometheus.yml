@@ -82,8 +82,44 @@ scrape_configs:
     static_configs:
       - targets:
           - https://loki.valiantlynx.com
-          - http://grafana.valiantlynx.com
+          - https://grafana.valiantlynx.com
+          - https://prometheus.valiantlynx.com
+          - https://alertmanager.valiantlynx.com
+          - https://portainer.valiantlynx.com
+          - https://dcgm.valiantlynx.com
+          - https://tempo.valiantlynx.com
+          - https://blackbox.valiantlynx.com
+          - https://uptime.valiantlynx.com
+          - https://manga.valiantlynx.com
+          - https://altlokalt.valiantlynx.com
+          - https://drivstoffapp.valiantlynx.com
+          - https://python-development-environment.valiantlynx.com
+          - https://svelte-leaflet.valiantlynx.com
+          - https://svelte-rich-text.valiantlynx.com
+          - https://www.valiantlynx.com
+          - https://valiantlynx.com
+          - https://svelte-manga-api.valiantlynx.com
+          - https://gun-chat.valiantlynx.com
+          - https://ollama.valiantlynx.com
+          - https://openwebui.valiantlynx.com
 
+          - https://ollama-docker.valiantlynx.com
+          - https://raga.valiantlynx.com
+          - https://raga-backend.valiantlynx.com
+          - https://valiantos.valiantlynx.com
+          - https://chattergun.valiantlynx.com
+          - https://chattergun-relay.valiantlynx.com
+          - https://gun-relay.valiantlynx.com
+          - https://portainer.valiantlynx.com
+          - https://recommendation-engine.valiantlynx.com
+          - https://streamio.valiantlynx.com
+          - https://streamio-server.valiantlynx.com
+          - https://www.altlokalt.com
+          - https://altlokalt.com
+          - https://www.drivstoffapp.com
+          - https://drivstoffapp.com
+          - https://www.animevariant.com
+          - https://animevariant.com
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
