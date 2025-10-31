@@ -75,10 +75,10 @@ scrape_configs:
     static_configs:
       - targets: ["tempo.valiantlynx.com"] #3200
 
-  - job_name: "blackbox"
-    metrics_path: /metrics
+  - job_name: 'blackbox'
+    metrics_path: /probe
     params:
-      module: [http_2xx]
+      module: [http_2xx]  # Use the module defined in blackbox.yml
     static_configs:
       - targets:
           - https://loki.valiantlynx.com
@@ -89,11 +89,10 @@ scrape_configs:
           - http://dcgm.valiantlynx.com
           - http://tempo.valiantlynx.com
           - http://blackbox.valiantlynx.com
-
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: blackbox.valiantlynx.com
+        replacement: blackbox:9115  # The hostname:port of your blackbox exporter
