@@ -76,7 +76,7 @@ scrape_configs:
       - targets: ["tempo.valiantlynx.com"] #3200
 
   - job_name: "blackbox"
-    metrics_path: /probe
+    metrics_path: /metrics
     params:
       module: [http_2xx]
     static_configs:
