@@ -75,8 +75,7 @@ scrape_configs:
     static_configs:
       - targets: ["tempo.valiantlynx.com"] #3200
 
-  - job_name: 'blackbox'
-    scheme: http
+  - job_name: "blackbox"
     metrics_path: /probe
     params:
       module: [http_2xx]
@@ -84,26 +83,11 @@ scrape_configs:
       - targets:
           - https://loki.valiantlynx.com
           - http://grafana.valiantlynx.com
-          - http://prometheus.valiantlynx.com
-          - http://alertmanager.valiantlynx.com
-          - http://portainer.valiantlynx.com
-          - http://dcgm.valiantlynx.com
-          - http://tempo.valiantlynx.com
-          - http://blackbox.valiantlynx.com
+
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
-        target_label: target
+        target_label: instance
       - target_label: __address__
         replacement: blackbox.valiantlynx.com
-      - source_labels: [__param_target]
-        regex: (.*)
-        target_label: instance
-        replacement: ${1}
-      - source_labels: [__param_target]
-        regex: (.*)
-        target_label: url
-        replacement: ${1}
-    scrape_interval: 15s
-    scrape_timeout: 10s
