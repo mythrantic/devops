@@ -1,7 +1,7 @@
 apiVersion: 1
 
 providers:
-  - name: 'Default'
+  - name: 'Services-Provider'
     folder: 'Services'
     orgId: 1
     disableDeletion: false
@@ -11,7 +11,7 @@ providers:
     options:
       path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/services
   
-  - name: 'Default'
+  - name: 'Domain-Probe-Provider'
     folder: 'Domain Name Probe'
     orgId: 1
     disableDeletion: false
@@ -21,7 +21,7 @@ providers:
     options:
       path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/domain-name-dash
 
-  - name: 'Default'
+  - name: 'GPU-Provider'
     folder: 'GPU'
     orgId: 1
     disableDeletion: false
@@ -31,7 +31,7 @@ providers:
     options:
       path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/gpu
 
-  - name: 'Default'
+  - name: 'Common-Provider'
     folder: 'Common'
     orgId: 1
     disableDeletion: false
