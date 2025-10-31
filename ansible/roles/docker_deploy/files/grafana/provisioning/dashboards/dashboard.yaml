@@ -9,7 +9,7 @@ providers:
     editable: true
     type: file
     options:
-      path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards
+      path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/services
   
   - name: 'Default'
     folder: 'Domain Name Probe'
@@ -20,3 +20,23 @@ providers:
     type: file
     options:
       path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/domain-name-dash
+
+  - name: 'Default'
+    folder: 'GPU'
+    orgId: 1
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    editable: true
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/gpu
+
+  - name: 'Default'
+    folder: 'Common'
+    orgId: 1
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    editable: true
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards
