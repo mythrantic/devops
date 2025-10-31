@@ -1,77 +1,99 @@
 # my global config
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
   evaluation_interval: 15s # By default, scrape targets every 15 seconds.
   # scrape_timeout is set to the global default (10s).
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: 'devops'
+    monitor: "devops"
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
-  - 'alert.rules'
+  - "alert.rules"
   # - "first.rules"
   # - "second.rules"
 
 # alert
 alerting:
   alertmanagers:
-  - scheme: http
-    static_configs:
-    - targets:
-      - "alertmanager.valiantlynx.com"
+    - scheme: http
+      static_configs:
+        - targets:
+            - "alertmanager.valiantlynx.com"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: "prometheus"
     static_configs:
-      - targets: ['prometheus.valiantlynx.com']
+      - targets: ["prometheus.valiantlynx.com"]
 
-  - job_name: 'node_exporter_devops'
+  - job_name: "node_exporter_devops"
     static_configs:
-      - targets: ['node_exporter:9100']
+      - targets: ["node_exporter:9100"]
 
-  - job_name: 'cadvisor_devops'
+  - job_name: "cadvisor_devops"
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: ["cadvisor:8080"]
 
-  - job_name: 'recommendation-engine'
+  - job_name: "recommendation-engine"
     scrape_interval: 5s
     static_configs:
-      - targets: ['recommendation-engine.valiantlynx.com']
+      - targets: ["recommendation-engine.valiantlynx.com"]
 
-  - job_name: 'sortify-backend'
+  - job_name: "sortify-backend"
     scrape_interval: 5s
     static_configs:
-      - targets: ['sortify-backend.valiantlynx.com']
+      - targets: ["sortify-backend.valiantlynx.com"]
 
-  - job_name: 'altlokalt-backend'
+  - job_name: "altlokalt-backend"
     scrape_interval: 5s
     static_configs:
-      - targets: ['altlokalt-backend.valiantlynx.com']
+      - targets: ["altlokalt-backend.valiantlynx.com"]
 
-  - job_name: 'svelte-manga-api'
+  - job_name: "svelte-manga-api"
     scrape_interval: 5s
     static_configs:
-      - targets: ['svelte-manga-api.valiantlynx.com']
-
+      - targets: ["svelte-manga-api.valiantlynx.com"]
 
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'dcgm'
+  - job_name: "dcgm"
 
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['dcgm.valiantlynx.com']
+      - targets: ["dcgm.valiantlynx.com"]
 
-  - job_name: 'tempo'
+  - job_name: "tempo"
     static_configs:
-      - targets: ['tempo.valiantlynx.com'] #3200
-  - job_name: 'tempo-usage-metrics'
-    metrics_path: '/usage_metrics'
+      - targets: ["tempo.valiantlynx.com"] #3200
+  - job_name: "tempo-usage-metrics"
+    metrics_path: "/usage_metrics"
     static_configs:
-      - targets: ['tempo.valiantlynx.com'] #3200
+      - targets: ["tempo.valiantlynx.com"] #3200
+
+  - job_name: "blackbox"
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - https://loki.valiantlynx.com
+          - http://grafana.valiantlynx.com
+          - http://prometheus.valiantlynx.com
+          - http://alertmanager.valiantlynx.com
+          - http://portainer.valiantlynx.com
+          - http://dcgm.valiantlynx.com
+          - http://tempo.valiantlynx.com
+          - http://blackbox.valiantlynx.com
+
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox.valiantlynx.com

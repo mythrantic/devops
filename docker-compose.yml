@@ -256,6 +256,16 @@ services:
     depends_on:
       - init
       - memcached
+
+  blackbox:
+    image: prom/blackbox-exporter:v0.24.0
+    restart: unless-stopped
+    expose:
+      - '9115'
+    command:
+      - '--config.file=/etc/blackbox/blackbox.yml'
+    volumes:
+      - ./config/blackbox.yml:/etc/blackbox/blackbox.yml
       
 networks:
   dokploy-network:
