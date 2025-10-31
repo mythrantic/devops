@@ -120,6 +120,20 @@ scrape_configs:
           - https://drivstoffapp.com
           - https://www.animevariant.com
           - https://animevariant.com
+
+          - https://breath-first-search.valiantlynx.com
+          - https://depth-first-search.valiantlynx.com
+          - https://altlokalt-backend.valiantlynx.com
+          - https://altlokalt-db.valiantlynx.com
+          - https://sortify.valiantlynx.com
+          - https://sortify-backend.valiantlynx.com
+          - https://erd.valiantlynx.com
+          - https://vault.valiantlynx.com
+          - https://kasm.valiantlynx.com
+          - https://altlokalt-erd.valiantlynx.com
+          - https://sortify-erd.valiantlynx.com
+          - https://sortify-db.valiantlynx.com
+
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
