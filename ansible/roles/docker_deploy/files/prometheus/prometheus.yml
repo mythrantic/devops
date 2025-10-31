@@ -96,7 +96,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: target
       - target_label: __address__
-        replacement: blackbox:9115
+        replacement: blackbox.valiantlynx.com
       - source_labels: [__param_target]
         regex: (.*)
         target_label: instance
