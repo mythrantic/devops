@@ -10,3 +10,13 @@ providers:
     type: file
     options:
       path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards
+  
+  - name: 'Default'
+    folder: 'Domain Name Probe'
+    orgId: 1
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    editable: true
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards/pre_loaded_dashboards/domain-name-dash
