@@ -266,6 +266,14 @@ services:
       - '--config.file=/etc/blackbox/blackbox.yml'
     volumes:
       - ./config/blackbox.yml:/etc/blackbox/blackbox.yml
-      
+    container_name: blackbox_exporter
+    networks:
+      - dokploy-network
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.blackbox.rule=Host(`blackbox.valiantlynx.com`)
+      - traefik.http.routers.blackbox.entrypoints=web
+      - traefik.http.services.blackbox.loadbalancer.server.port=9115
+            
 networks:
   dokploy-network:
