@@ -41,8 +41,6 @@ services:
   loki:
     image: grafana/loki:latest
     container_name: loki 
-    ports:
-      - "9029:3100"
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - dokploy-network
@@ -71,15 +69,11 @@ services:
     command: -config.file=/etc/promtail/config.yml
     networks:
       - dokploy-network
-    ports:
-      - "1514:1514"
     restart: unless-stopped
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    ports:
-      - 9002:3000
     volumes:
       - grafana-data:/var/lib/grafana
       - ./ansible/roles/docker_deploy/files/grafana/:/etc/grafana/
@@ -97,8 +91,6 @@ services:
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node_exporter
-    ports:
-      - 9003:9100
     command: 
       - '--path.rootfs=/host'
     pid: host
@@ -111,8 +103,6 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
-    ports:
-      - 9004:8080
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -129,8 +119,6 @@ services:
   uptime-kuma:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
-    ports:
-      - 9005:3001
     volumes:
       - ./ansible/roles/docker_deploy/files/uptime-kuma:/app/data
     restart: always
@@ -147,8 +135,6 @@ services:
   alertmanager:
     image: prom/alertmanager
     container_name: alertmanager
-    ports:
-      - 9006:9093
     volumes:
       - ./ansible/roles/docker_deploy/files/alertmanager/:/etc/alertmanager/
     networks:
@@ -168,9 +154,6 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     restart: always
-    ports:
-      - 9030:9000
-      - 9031:9443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data 
@@ -178,6 +161,7 @@ services:
       - dokploy-network
     expose:
       - 9000
+      - 9443
     labels:
       - traefik.enable=true
       - traefik.http.routers.portainer.rule=Host(`portainer.valiantlynx.com`)
@@ -223,8 +207,6 @@ services:
   memcached:
     image: memcached:1.6.38
     container_name: memcached
-    ports:
-      - "11211:11211"
     environment:
       - MEMCACHED_MAX_MEMORY=64m # Set the maximum memory usage
       - MEMCACHED_THREADS=4 # Number of threads to use
@@ -235,19 +217,16 @@ services:
     volumes:
       - ./ansible/roles/docker_deploy/files/tempo/tempo.yaml:/etc/tempo.yaml
       - ./tempo-data:/var/tempo
-    ports:
-      - "14268:14268" # jaeger ingest
-      - "3200:3200" # tempo
-      - "9095:9095" # tempo grpc
-      - "4317:4317" # otlp grpc
-      - "4318:4318" # otlp http
-      - "9411:9411" # zipkin
     container_name: tempo
     restart: unless-stopped
     networks:
       - dokploy-network
     expose:
-      - 3200
+      - 3200 # tempo
+      - 9095 # tempo grpc
+      - 4317 # otlp grpc
+      - 4318 # otlp http
+      - 9411 # zipkin
     labels:
       - traefik.enable=true
       - traefik.http.routers.tempo.rule=Host(`tempo.valiantlynx.com`)
